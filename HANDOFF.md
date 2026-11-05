@@ -25,9 +25,12 @@
 
 ## Siguientes juegos candidatos
 
-Pendiente de que el usuario elija. Ideas de la tabla de naomi-wheel-games: F355 Challenge (cambio),
-Wave Runner GP, 18 Wheeler (palanca de 3 posiciones), Maximum Speed / Faster Than Speed (Atomiswave),
-Club Kart / King of Route 66 / Wild Riders (NAOMI 2).
+Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
+multijuego de arcade-projects, traducido a lo que debe hacer cada parche. Orden propuesto:
+1. 18 Wheeler (Standard, 840-0036): pendiente de que el usuario pase su volcado.
+2. Club Kart e Initial D (solo palanca a J2 + vista).
+3. Faster Than Speed (turbo) y comprobar Maximum Speed (Atomiswave).
+4. King of Route 66 (lo más complejo).
 
 ## Cómo trabajar
 

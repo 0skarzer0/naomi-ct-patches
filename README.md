@@ -40,6 +40,19 @@ parche) y no modifica el original. El `.bin.gz` resultante se carga por netboot 
 
 Leyenda: ✅ probado en placa · 🧪 verificado en intérprete/emulador · 🔍 en análisis · ⏳ pendiente
 
+## Juegos previstos
+
+Según la [referencia de arneses](docs/referencia-arneses.md) (lo que otro usuario resolvió con cables):
+
+| Juego | Qué necesita | Estado |
+|---|---|---|
+| 18 Wheeler (Standard) | Palanca a J2 directa, marchas larga/corta/atrás, vista y bocina en combinaciones | ⏳ |
+| Club Kart | Palanca a J2 directa, vista en combinación | ⏳ |
+| Initial D 1/2/3 | Palanca a J2 directa, vista en combinación | ⏳ |
+| Faster Than Speed | Turbo (J1 B1) en combinación | ⏳ |
+| Maximum Speed | Nada (según el arnés): comprobar | ⏳ |
+| King of Route 66 | Como 18 Wheeler + limpiaparabrisas; el micrófono necesita hardware | ⏳ |
+
 ## Procedimiento (repetible con otros juegos)
 
 1. **Comparar mapeos**: `naomi_roms_input.h` de Flycast e `INPUT_PORTS` de `naomi.cpp` en MAME, frente a
