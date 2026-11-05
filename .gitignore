@@ -1,0 +1,7 @@
+# Nunca subir ROMs ni binarios generados
+*.bin
+*.bin.gz
+*.zip
+*.7z
+*.dat
+__pycache__/
