@@ -12,6 +12,12 @@ class CPU:
     def ww(s,a,v): assert a%2==0,hex(a); s.wb(a,v); s.wb(a+1,v>>8)
     def rl(s,a): assert a%4==0,hex(a); return s.rw(a)|s.rw(a+2)<<16
     def wl(s,a,v): assert a%4==0,hex(a); s.ww(a,v); s.ww(a+2,v>>16)
+    def run_until(s,pc,stop,maxsteps=100000):
+        n=0
+        while pc!=stop:
+            n+=1; assert n<maxsteps, hex(pc)
+            pc=s.step(pc)
+        return n
     def call(s,pc,maxsteps=100000):
         R=s.R; s.PR=0xDEAD0000; R[15]=0x0CFF0000
         n=0
@@ -44,6 +50,11 @@ class CPU:
         elif hi==0xE: R[n]=sx8(i8)&M
         elif hi==0x7: R[n]=(R[n]+sx8(i8))&M
         elif op>>8==0xC9: R[0]&=i8
+        elif op>>8==0xCB: R[0]|=i8
+        elif hi==0x1: s.wl((R[n]+lo*4)&M,R[m])
+        elif hi==0x0 and lo==0xC: R[n]=sx8(s.rb((R[0]+R[m])&M))&M
+        elif hi==0x0 and lo==0xD: R[n]=sx16(s.rw((R[0]+R[m])&M))&M
+        elif hi==0x0 and lo==0x6: s.wl((R[0]+R[n])&M,R[m])
         elif op>>8==0xC8: s.T=int((R[0]&i8)==0)
         elif op>>8==0x88: s.T=int(R[0]==(sx8(i8)&M))
         elif op>>8==0x80: s.wb(R[m]+lo,R[0])
@@ -72,6 +83,7 @@ class CPU:
         elif hi==0x3:
             a,b=R[n],R[m]; sa=a-(1<<32) if a>>31 else a; sb=b-(1<<32) if b>>31 else b
             if lo==0: s.T=int(a==b)
+            elif lo==2: s.T=int(a>=b)
             elif lo==3: s.T=int(sa>=sb)
             elif lo==7: s.T=int(sa>sb)
             elif lo==0xC: R[n]=(a+b)&M

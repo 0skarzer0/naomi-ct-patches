@@ -37,6 +37,7 @@ parche) y no modifica el original. El `.bin.gz` resultante se carga por netboot 
 | Juego | Placa | Entrada original | Reasignación en el mueble Crazy Taxi | Estado |
 |---|---|---|---|---|
 | [Jambo! Safari](jambo-safari/) (840-0013 Rev A) | NAOMI | Palanca en J2 ARRIBA/ABAJO | Palanca D/R (J1) → J2, en cruz: adelante = lazo | ✅ Probado en placa (variante cruzada, 2026-11-05) |
+| [18 Wheeler Standard](18-wheeler/) (840-0036) | NAOMI | Palanca de 3 posiciones fija en J2, vista en J1 ABAJO, bocina en J1 B1 | Toques adelante/atrás = larga/corta (se quedan), atrás mantenido = marcha atrás, START corto = vista, START largo = bocina | 🧪 Probado en intérprete; falta placa |
 
 Leyenda: ✅ probado en placa · 🧪 verificado en intérprete/emulador · 🔍 en análisis · ⏳ pendiente
 
@@ -46,7 +47,6 @@ Según la [referencia de arneses](docs/referencia-arneses.md) (lo que otro usuar
 
 | Juego | Qué necesita | Estado |
 |---|---|---|
-| 18 Wheeler (Standard) | Palanca a J2 directa, marchas larga/corta/atrás, vista y bocina en combinaciones | ⏳ |
 | Club Kart | Palanca a J2 directa, vista en combinación | ⏳ |
 | Initial D 1/2/3 | Palanca a J2 directa, vista en combinación | ⏳ |
 | Faster Than Speed | Turbo (J1 B1) en combinación | ⏳ |
@@ -77,6 +77,7 @@ las direcciones de carga salen de la cabecera de cada conversión.
 | `apply_patch.py` | Aplica un IPS a un `.bin`/`.bin.gz` y comprueba la zona original (`.ips.sha1`) |
 | `tools/sh4dis.py` | Desensamblador SH-4 con literales resueltos (`pip install "capstone>=6"`); base de carga `0x0C020000` |
 | `tools/sh4mini.py` | Intérprete SH-4 mínimo para pruebas de equivalencia de funciones pequeñas |
+| `tools/sh4asm.py` | Ensamblador SH-4 mínimo (etiquetas, huecos) para escribir los parches a mano |
 
 Cada juego tiene en su carpeta un `build_patch.py` (genera los IPS desde ensamblador escrito a mano),
 un `test_patch.py` y un `README.md` con las direcciones y notas técnicas.

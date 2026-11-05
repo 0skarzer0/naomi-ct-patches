@@ -23,14 +23,24 @@
 - Entrada en `romsinfo.csv` de WiPi: `jambo_safari_ct_cruzado.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BAU0`.
 - No probado en Flycast (hace falta la BIOS NAOMI, que no está en el entorno de trabajo).
 
+### 18 Wheeler Standard (840-0036) — 🧪 falta probar en placa
+
+- Volcado de referencia: `n1-18_wheeler_std-[840-0036].bin`, MD5 `dc761d5f3ac44b749894a9e1227146d8`.
+- Lógica acordada con el usuario: toque adelante = larga y toque atrás = corta (se quedan puestas);
+  atrás mantenido con freno o largo = marcha atrás; START corto = vista; START largo = bocina.
+- Parche: reescribe el bucle de estructuras de `0x0C021E30` (zonas `0x0C021F4E`–`0x0C021F81` y
+  `0x0C021FB4`–`0x0C02205D`). Detalles en [18-wheeler/README.md](18-wheeler/README.md).
+- **Siguiente paso:** el usuario lo prueba en placa. Ajustes posibles en `build_patch.py`: `HOLD`, `LONG`,
+  `BRAKE` (umbral del freno) y `HORN`. Si la vista no responde con un pulso de 1 frame, alargarlo.
+- Entrada en `romsinfo.csv`: `18wheeler_std_ct.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BBK0`.
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
 multijuego de arcade-projects, traducido a lo que debe hacer cada parche. Orden propuesto:
-1. 18 Wheeler (Standard, 840-0036): pendiente de que el usuario pase su volcado.
-2. Club Kart e Initial D (solo palanca a J2 + vista).
-3. Faster Than Speed (turbo) y comprobar Maximum Speed (Atomiswave).
-4. King of Route 66 (lo más complejo).
+1. Club Kart e Initial D (solo palanca a J2 + vista).
+2. Faster Than Speed (turbo) y comprobar Maximum Speed (Atomiswave).
+3. King of Route 66 (lo más complejo).
 
 ## Cómo trabajar
 
