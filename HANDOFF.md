@@ -12,14 +12,15 @@
 
 ## Estado por juego
 
-### Jambo! Safari (840-0013 Rev A) — 🧪 falta probar en placa
+### Jambo! Safari (840-0013 Rev A) — ✅ funciona en placa
 
 - Volcado de referencia: `n1-jambo_safari-840-0013.bin`, MD5 `4efd869b0d688a80a8ab8c51f4897d24`.
 - Parche: reescribe `0x0C0217CC` (offset ROM `0x0017CC`, 104 bytes). Detalles en
   [jambo-safari/README.md](jambo-safari/README.md).
 - Verificado: equivalencia en `tools/sh4mini.py` (3000 frames, 0–3 jugadores).
-- **Siguiente paso:** el usuario prueba en placa la variante `cruzado` (adelante = lazo). Si el sentido
-  sale al revés, `directo`. Anotar el resultado y si aparece algún error de ROM al arrancar.
+- **Probado en placa (2026-11-05):** la variante `cruzado` funciona a la primera en el mueble Crazy
+  Taxi (palanca adelante = lazo), sin errores de ROM al arrancar. La `directa` queda como alternativa.
+- Entrada en `romsinfo.csv` de WiPi: `jambo_safari_ct_cruzado.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BAU0`.
 - No probado en Flycast (hace falta la BIOS NAOMI, que no está en el entorno de trabajo).
 
 ## Siguientes juegos candidatos

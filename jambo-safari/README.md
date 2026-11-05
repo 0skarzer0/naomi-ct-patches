@@ -57,7 +57,7 @@ En WiPi se añade como un juego más (fichero `.bin.gz` + línea en `romsinfo.cs
   original con el puente físico simulado, en las dos variantes.
 - A la función solo se entra por su inicio (desde `0x0C021C42` y `0x0C021C8E`). El aparente salto desde
   `0x0C021BAC` es un pool de literales.
-- La cabecera NAOMI no lleva checksum. El juego no comprueba esta zona: **pendiente de confirmar en placa**.
+- La cabecera NAOMI no lleva checksum y el juego no comprueba esta zona: confirmado en placa, arranca sin errores.
 
 ## Estado
 
@@ -67,7 +67,7 @@ En WiPi se añade como un juego más (fichero `.bin.gz` + línea en `romsinfo.cs
 | Parche (dos variantes) + script | ✅ |
 | Prueba de equivalencia en intérprete | ✅ |
 | Prueba en Flycast | ⏳ (necesita BIOS NAOMI) |
-| Prueba en placa (mueble Crazy Taxi) | ⏳ |
+| Prueba en placa (mueble Crazy Taxi) | ✅ variante cruzada, a la primera (2026-11-05) |
 
 ## Para regenerar o modificar
 

@@ -36,7 +36,7 @@ parche) y no modifica el original. El `.bin.gz` resultante se carga por netboot 
 
 | Juego | Placa | Entrada original | Reasignación en el mueble Crazy Taxi | Estado |
 |---|---|---|---|---|
-| [Jambo! Safari](jambo-safari/) (840-0013 Rev A) | NAOMI | Palanca en J2 ARRIBA/ABAJO | Palanca D/R (J1) → J2, en cruz: adelante = lazo | 🧪 Probado en intérprete; falta Flycast/placa |
+| [Jambo! Safari](jambo-safari/) (840-0013 Rev A) | NAOMI | Palanca en J2 ARRIBA/ABAJO | Palanca D/R (J1) → J2, en cruz: adelante = lazo | ✅ Probado en placa (variante cruzada, 2026-11-05) |
 
 Leyenda: ✅ probado en placa · 🧪 verificado en intérprete/emulador · 🔍 en análisis · ⏳ pendiente
 
