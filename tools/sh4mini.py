@@ -55,6 +55,8 @@ class CPU:
         elif hi==0x0 and lo==0xC: R[n]=sx8(s.rb((R[0]+R[m])&M))&M
         elif hi==0x0 and lo==0xD: R[n]=sx16(s.rw((R[0]+R[m])&M))&M
         elif hi==0x0 and lo==0x6: s.wl((R[0]+R[n])&M,R[m])
+        elif hi==0x0 and lo==0x4: s.wb((R[0]+R[n])&M,R[m])
+        elif hi==0x5: R[n]=s.rl((R[m]+lo*4)&M)
         elif op>>8==0xC8: s.T=int((R[0]&i8)==0)
         elif op>>8==0x88: s.T=int(R[0]==(sx8(i8)&M))
         elif op>>8==0x80: s.wb(R[m]+lo,R[0])
@@ -66,6 +68,7 @@ class CPU:
             elif lo==1: R[n]=sx16(s.rw(R[m]))&M
             elif lo==2: R[n]=s.rl(R[m])
             elif lo==3: R[n]=R[m]
+            elif lo==4: v=sx8(s.rb(R[m]))&M; R[m]=(R[m]+1)&M; R[n]=v
             elif lo==5: v=sx16(s.rw(R[m]))&M; R[m]=(R[m]+2)&M; R[n]=v
             elif lo==7: R[n]=(~R[m])&M
             elif lo==0xC: R[n]=R[m]&0xFF

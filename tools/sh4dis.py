@@ -1,7 +1,9 @@
 import sys, struct, capstone as c
 rom=sys.argv[1]; start=int(sys.argv[2],16); n=int(sys.argv[3],16)
+# 4º argumento opcional: offset de la ROM que se carga en 0x0C020000 (p. ej. 500 en Initial D)
+romoff=int(sys.argv[4],16) if len(sys.argv)>4 else 0
 B=0x0C020000
-d=open(rom,'rb').read()
+d=open(rom,'rb').read()[romoff:]
 md=c.Cs(c.CS_ARCH_SH, c.CS_MODE_SH4 | c.CS_MODE_LITTLE_ENDIAN)
 off=start-B
 for i in range(0,n,2):

@@ -60,6 +60,11 @@ class Asm:
     def movb_r0idx(s,m,n): s.w(0x000C|r(n)<<8|r(m)<<4)  # mov.b @(R0,Rm),Rn
     def movl_st_d(s,m,d,n): assert d%4==0 and 0<=d<64; s.w(0x1000|r(n)<<8|r(m)<<4|(d//4))  # mov.l Rm,@(d,Rn)
     def movl_st(s,m,n): s.w(0x2002|r(n)<<8|r(m)<<4)     # mov.l Rm,@Rn
+    def movb_st_r0idx(s,m,n): s.w(0x0004|r(n)<<8|r(m)<<4)  # mov.b Rm,@(R0,Rn)
+    def movl_ld_d(s,d,m,n): assert d%4==0 and 0<=d<64; s.w(0x5000|r(n)<<8|r(m)<<4|(d//4))  # mov.l @(d,Rm),Rn
+    def movb_inc(s,m,n): s.w(0x6004|r(n)<<8|r(m)<<4)   # mov.b @Rm+,Rn
+    def not_(s,m,n): s.w(0x6007|r(n)<<8|r(m)<<4)
+    def bsr_l(s,lbl): s.fix.append((len(s.code),'bra',lbl)); s.w(0xB000)  # bsr a etiqueta
     def finish(s):
         for idx,kind,lbl in s.fix:
             a=s.addrs[idx]; d=(s.labels[lbl]-(a+4))//2

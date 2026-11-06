@@ -34,11 +34,28 @@
   `BRAKE` (umbral del freno) y `HORN`. Si la vista no responde con un pulso de 1 frame, alargarlo.
 - Entrada en `romsinfo.csv`: `18wheeler_std_ct.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BBK0`.
 
+### Initial D Export Rev A (GDS-0025A) — 🧪 falta probar en placa
+
+- Volcado de referencia: `n2-initial_d_export_rev.a-[GDS-0025A].bin`, MD5 `eb7d81c2a0792267d0733beea5956066`.
+  El programa se carga desde el offset 0x500 de la ROM (en `sh4dis.py` se pasa `500` como 4º argumento).
+- Lógica acordada: palanca adelante/atrás = subir/bajar (J2 directa, sin enclavar), START corto = vista.
+- Parche: reescribe los bucles de `0x0C1579C0` (ROM `0x137ED6`, 166 bytes). Detalles en
+  [initial-d/README.md](initial-d/README.md).
+- **Siguiente paso:** probarlo en placa (MT). Comprobar si en algún menú el pulso de vista molesta y si el
+  juego se queja de que falta el lector de tarjetas.
+- Entrada en `romsinfo.csv`: `initiald_exp_reva_ct.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BFFA`.
+
+### Aviso: 18 Wheeler y la BIOS multirregión
+
+El usuario tiene BIOS multirregión. Según arcade-otaku y arcade-projects, 18 Wheeler se cuelga con ella
+(en la demo o en el mapa de EE. UU.) aunque no esté parcheado. Con la BIOS Export EPR-23608B o la
+Export H funciona. El parche de 18 Wheeler no se puede probar en placa hasta cambiar la BIOS.
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
 multijuego de arcade-projects, traducido a lo que debe hacer cada parche. Orden propuesto:
-1. Club Kart e Initial D (solo palanca a J2 + vista).
+1. Club Kart (palanca a J2 + vista) e Initial D Ver. 2 / Ver. 3 (mismo método que la Ver. 1).
 2. Faster Than Speed (turbo) y comprobar Maximum Speed (Atomiswave).
 3. King of Route 66 (lo más complejo).
 

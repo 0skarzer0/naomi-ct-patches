@@ -37,7 +37,8 @@ parche) y no modifica el original. El `.bin.gz` resultante se carga por netboot 
 | Juego | Placa | Entrada original | Reasignación en el mueble Crazy Taxi | Estado |
 |---|---|---|---|---|
 | [Jambo! Safari](jambo-safari/) (840-0013 Rev A) | NAOMI | Palanca en J2 ARRIBA/ABAJO | Palanca D/R (J1) → J2, en cruz: adelante = lazo | ✅ Probado en placa (variante cruzada, 2026-11-05) |
-| [18 Wheeler Standard](18-wheeler/) (840-0036) | NAOMI | Palanca de 3 posiciones fija en J2, vista en J1 ABAJO, bocina en J1 B1 | Toques adelante/atrás = larga/corta (se quedan), atrás mantenido = marcha atrás, START corto = vista, START largo = bocina | 🧪 Probado en intérprete; falta placa |
+| [18 Wheeler Standard](18-wheeler/) (840-0036) | NAOMI | Palanca de 3 posiciones fija en J2, vista en J1 ABAJO, bocina en J1 B1 | Toques adelante/atrás = larga/corta (se quedan), atrás mantenido = marcha atrás, START corto = vista, START largo = bocina | 🧪 Probado en intérprete; falta placa (la BIOS multirregión cuelga este juego: hace falta la Export) |
+| [Initial D Export Rev A](initial-d/) (GDS-0025A) | NAOMI 2 | Cambio secuencial en J2 ARRIBA/ABAJO, vista en J1 ABAJO | Palanca adelante/atrás = subir/bajar (directa), START corto = vista | 🧪 Probado en intérprete; falta placa |
 
 Leyenda: ✅ probado en placa · 🧪 verificado en intérprete/emulador · 🔍 en análisis · ⏳ pendiente
 
@@ -48,7 +49,7 @@ Según la [referencia de arneses](docs/referencia-arneses.md) (lo que otro usuar
 | Juego | Qué necesita | Estado |
 |---|---|---|
 | Club Kart | Palanca a J2 directa, vista en combinación | ⏳ |
-| Initial D 1/2/3 | Palanca a J2 directa, vista en combinación | ⏳ |
+| Initial D Ver. 2 / Ver. 3 | Como la Ver. 1 (cada versión su parche) | ⏳ |
 | Faster Than Speed | Turbo (J1 B1) en combinación | ⏳ |
 | Maximum Speed | Nada (según el arnés): comprobar | ⏳ |
 | King of Route 66 | Como 18 Wheeler + limpiaparabrisas; el micrófono necesita hardware | ⏳ |
