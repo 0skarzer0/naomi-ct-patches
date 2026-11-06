@@ -32,6 +32,19 @@ L_SYSB = 0x0C157AE4   # 0x0C8D860C byte de sistema crudo
 L_P    = 0x0C157AE8   # 0x0C7DE030 estructuras de jugador (64 bytes cada una)
 L_RAW  = 0x0C157AEC   # 0x0C8D860D crudo del J1 (16 bytes por jugador)
 
+# Lector de tarjetas (CARD R/W) apagado por defecto: bit 4 de la palabra +12 de los ajustes del juego.
+# Inicialización de fábrica (programa principal y programa de test): (x & ~0x0F) | 0x14 -> (x & ~0x1F) | 0x04.
+# Migración de ajustes antiguos, que forzaba el lector a ON: se anula.
+TEST_ROMOFF = 0x300000   # el programa de test se carga desde aquí, también en BASE
+CARD_OFF = [  # (programa, dirección, bytes originales, bytes nuevos)
+    ('main', 0x0C04EE52, b'\xf0\xe3', b'\xe0\xe3'),   # mov #-16,r3 -> mov #-32,r3
+    ('main', 0x0C04EE82, b'\x14\xcb', b'\x04\xcb'),   # or #20,r0  -> or #4,r0
+    ('main', 0x0C04EFFA, b'\x10\xcb', b'\x09\x00'),   # or #16,r0  -> nop
+    ('test', 0x0C0217B2, b'\xf0\xe3', b'\xe0\xe3'),
+    ('test', 0x0C0217E2, b'\x14\xcb', b'\x04\xcb'),
+    ('test', 0x0C0218BC, b'\x10\xcb', b'\x09\x00'),
+]
+
 VIEW_MAX = 30         # START más corto que esto (frames) -> vista al soltar
 UP, DOWN, START_B = 0x20, 0x10, 0x80
 
@@ -79,17 +92,22 @@ def build():
     a.label('end')
     return a.finish()
 
+def rom_records():
+    """[(offset en ROM, bytes nuevos, bytes originales esperados o None)]"""
+    recs = [(addr - BASE + ROMOFF, data, None) for addr, data in build()]
+    for prog, addr, old, new in CARD_OFF:
+        recs.append((addr - BASE + (ROMOFF if prog == 'main' else TEST_ROMOFF), new, old))
+    return recs
+
 def ips(records):
     out = bytearray(b'PATCH')
-    for addr, data in records:
-        off = addr - BASE + ROMOFF
+    for off, data, _ in records:
         out += struct.pack('>I', off)[1:] + struct.pack('>H', len(data)) + data
     return bytes(out + b'EOF')
 
 if __name__ == '__main__':
-    segs = build()
+    recs = rom_records()
     here = os.path.dirname(os.path.abspath(__file__))
-    open(os.path.join(here, 'initiald_ct.ips'), 'wb').write(ips(segs))
-    used = sum(len(d) for _, d in segs)
-    for addr, data in segs:
-        print(f'0x{addr:08X} (ROM 0x{addr-BASE+ROMOFF:06X}): {len(data)} bytes')
+    open(os.path.join(here, 'initiald_ct.ips'), 'wb').write(ips(recs))
+    for off, data, _ in recs:
+        print(f'ROM 0x{off:06X}: {len(data)} bytes')

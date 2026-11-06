@@ -41,8 +41,9 @@
 - Lógica acordada: palanca adelante/atrás = subir/bajar (J2 directa, sin enclavar), START corto = vista.
 - Parche: reescribe los bucles de `0x0C1579C0` (ROM `0x137ED6`, 166 bytes). Detalles en
   [initial-d/README.md](initial-d/README.md).
-- **Siguiente paso:** probarlo en placa (MT). Comprobar si en algún menú el pulso de vista molesta y si el
-  juego se queja de que falta el lector de tarjetas.
+- CARD R/W apagado por defecto (6 bytes en las rutinas de ajustes de fábrica, main y test), a petición del
+  usuario: al cambiar de juego por netboot los ajustes se reinician.
+- **Siguiente paso:** probarlo en placa (MT). Comprobar si en algún menú el pulso de vista molesta.
 - Entrada en `romsinfo.csv`: `initiald_exp_reva_ct.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BFFA`.
 
 ### Aviso: 18 Wheeler y la BIOS multirregión

@@ -25,6 +25,10 @@ Crazy Taxi. Basta con llevarla al J2 sin cruzar, como hace el arnés 2 de la
 
 Para usar la palanca, elige **MT** (cambio manual) al empezar. Con **AT** no hace falta.
 
+El **lector de tarjetas (CARD R/W) viene apagado por defecto**. Los ajustes del juego se guardan en la
+placa y se reinician cada vez que se carga otro juego por netboot. Antes volvía a ON y había que apagarlo
+a mano en el menú de test.
+
 ## Qué hace el parche (técnico)
 
 En este juego el programa se carga desde el offset `0x500` de la ROM en `0x0C020000`.
@@ -44,6 +48,17 @@ se reescriben con una subrutina común. En el espacio ganado va la lógica:
   Válido mientras la I/O mande menos de 9 bytes por jugador (la de Sega manda 2).
 - El prólogo, el epílogo y el resto de la función no cambian. El búfer crudo no se modifica.
 
+### Lector de tarjetas apagado por defecto
+
+Los ajustes de *GAME ASSIGNMENTS* están en una estructura que empieza por el identificador `BFFA`. La
+palabra `+8` guarda la dificultad (bits 0–3), el asiento (bits 4–5) y la vista (bits 6–7); la palabra
+`+12` guarda CARD R/W (bit 4). Si la placa no tiene ajustes de este juego, se inicializan con
+`(x & ~0x0F) | 0x14`, que pone el lector a ON. Esa rutina está en el programa principal (`0x0C04EE40`)
+y en el de test (`0x0C0217A0`, cargado desde el offset `0x300000` de la ROM). El parche la cambia a
+`(x & ~0x1F) | 0x04`. También anula, en los dos programas, la migración de ajustes antiguos que forzaba
+el lector a ON. Son 6 bytes, verificados en el intérprete: 500 inicializaciones aleatorias por programa,
+iguales al original salvo CARD R/W = OFF.
+
 ## Cómo aplicarlo
 
 ```sh
@@ -57,7 +72,7 @@ Volcado probado: `n2-initial_d_export_rev.a-[GDS-0025A].bin`, 201 129 984 bytes,
 - `test_patch.py`: 8000 frames aleatorios (0–3 jugadores, 0–8 bytes por jugador). Los bucles parcheados
   dan **byte a byte** las mismas estructuras que los originales alimentados con un "arnés lógico".
   Además prueba los escenarios: palanca adelante y atrás, START corto y largo.
-- Solo cambian 163 bytes de la ROM. Nadie salta al interior de la zona reescrita.
+- Cambian 163 bytes en la función de entradas y 6 en los ajustes por defecto. Nadie salta al interior de la zona reescrita.
 
 ## Estado
 
