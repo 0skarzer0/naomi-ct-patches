@@ -99,6 +99,13 @@
   El juego interpreta el byte R así (0x0C138CC0): bits 7-6 → +48 (persiana), bit 5 → +52 STOCKER (1 = OK,
   0 = "NO CARD IN BOX"); el lector virtual manda bit 5 = 1. Sin ajustes de precio de tarjeta en el juego.
   Por confirmar: si el "sí" de compra se registró (¿el pulso de vista vale en ese menú?).
+- **2026-11-12, el cuelgue NO es del lector ni del parche:** tras una partida, en attract, se cuelga
+  igual con (a) la imagen del lector virtual sin hacer ningún peek, (b) `initiald_exp_reva_ct` (sin lector
+  virtual, CARD R/W OFF) y (c) el **volcado original sin parchear**. Coincide con lo publicado sobre la BIOS
+  multirregión antigua: Initial D (ID3 documentado) se cuelga en el modo REPLAY del attract después de jugar
+  una partida; una BIOS multirregión más nueva (rev C/H, v2.01) lo arregla, según arcade-projects. Mismo
+  problema de fondo que 18 Wheeler. Opciones: actualizar la BIOS, o (por estudiar) un parche que
+  quite el replay del attract.
 - **Pendiente ahora:** el usuario juega comprando tarjeta nueva; después, `vcard_pi.py debug` y comprobar
   `/boot/roms/initiald_exp_reva_vcard.card`; luego recargar el juego y ver que la lee. Después: integrar
   `vcard_pi.py send` en `wipiloader.py` (como dc2naomi) para que funcione cargando desde la web/menú.

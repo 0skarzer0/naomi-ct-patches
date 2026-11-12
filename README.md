@@ -62,7 +62,7 @@ guarda como archivo en la Raspberry, sin cable ni adaptador.
 
 | Juego | Estado |
 |---|---|
-| Initial D Export Rev A (GDS-0025A) | 🧪 Probado en el PC y en el intérprete SH-4; falta placa |
+| Initial D Export Rev A (GDS-0025A) | 🧪 Arranca en placa y habla con el juego sin errores; falta comprobar compra y grabado (la BIOS multirregión cuelga el juego en el replay del attract, también sin parchear) |
 
 ## Procedimiento (repetible con otros juegos)
 
