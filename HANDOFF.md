@@ -84,6 +84,14 @@
   vuelta al sondeo 20/40. No hubo B0 (dispensar) ni 53 (escribir): no se ofreció comprar tarjeta o no se
   eligió. 0 NAK. El byte R coincide con YACardEmu: bit7 persiana abierta (si no, bit6), bit5 = dispensador
   con tarjetas. Falta saber qué mostró la pantalla (¿opción de comprar tarjeta?, ¿depende de créditos?).
+- **2026-11-12, cuelgue en attract** justo después de la partida, a la vez que se hacían lecturas masivas por
+  peek (`vcard_pi.py debug` + un volcado del registro: ~550 peeks seguidos) con el juego cargando datos del
+  DIMM en attract. Con el juego colgado, los peeks tardan 30 s y devuelven 0: los atiende el propio
+  software de la NAOMI, así que no se puede ver a posteriori dónde se colgó. El vigilante (4 peeks cada 3 s)
+  aguantó 18 min con partida incluida. **Hipótesis:** los peeks seguidos interfieren con las lecturas del
+  juego al DIMM. Prueba en curso: juego recargado SIN vigilante, en attract, sin peeks.
+  Si no se cuelga: vigilante con 1 peek (seq) por vuelta y la tarjeta leída despacio (pausa entre peeks);
+  `debug` solo con el juego parado o en test.
 - **Pendiente ahora:** el usuario juega comprando tarjeta nueva; después, `vcard_pi.py debug` y comprobar
   `/boot/roms/initiald_exp_reva_vcard.card`; luego recargar el juego y ver que la lee. Después: integrar
   `vcard_pi.py send` en `wipiloader.py` (como dc2naomi) para que funcione cargando desde la web/menú.
