@@ -15,7 +15,7 @@ pulsado +32, soltado +48. Se reescriben sus dos bucles (0x0C1579D6-0x0C157A7B) c
 y en el espacio ganado va la lógica. Prólogo, epílogo y el resto de la función no cambian.
 Estado: 1 byte libre del hueco JVS del J1 (0x0C8D8615 = crudo J1 + 8).
 
-Uso: python3 build_patch.py  -> initiald_ct.ips
+Uso: python3 build_patch.py  -> initiald_ct.ips (controles + lector apagado) e initiald_ct_controles.ips (solo controles)
 """
 import os, struct, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'tools'))
@@ -109,5 +109,7 @@ if __name__ == '__main__':
     recs = rom_records()
     here = os.path.dirname(os.path.abspath(__file__))
     open(os.path.join(here, 'initiald_ct.ips'), 'wb').write(ips(recs))
+    # Solo controles (sin apagar el lector): para usarlo con el lector virtual de card-reader/
+    open(os.path.join(here, 'initiald_ct_controles.ips'), 'wb').write(ips(recs[:-len(CARD_OFF)]))
     for off, data, _ in recs:
         print(f'ROM 0x{off:06X}: {len(data)} bytes')

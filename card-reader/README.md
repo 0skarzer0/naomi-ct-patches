@@ -93,6 +93,17 @@ python3 make_image.py "n2-initial_d_export_rev.a-[GDS-0025A].bin.gz" initiald_ex
 python3 make_image.py ROM.bin.gz SALIDA.bin.gz --card mi_tarjeta.card
 ```
 
+Imagen completa para el mueble Crazy Taxi (la que usa el autor):
+
+```sh
+python3 apply_patch.py ROM.bin.gz initial-d/initiald_ct_controles.ips /tmp/a.bin.gz   # controles CT, lector ON
+python3 card-reader/make_image.py /tmp/a.bin.gz /tmp/b.bin.gz                        # lector virtual
+python3 tools/system_defaults.py /tmp/b.bin.gz initiald_exp_reva_vcard.bin.gz        # free play, attract mudo
+```
+
+Los ajustes de la cabecera solo los aplica la BIOS al inicializar los del juego. Si Initial D (mismo
+game ID, BFFA) era lo último cargado, primero hay que cargar otro juego y después este.
+
 ### 2. En la Raspberry (WiPi Netbooter)
 
 Copiar `vcard_pi.py` a `/sbin/piforce/`. Usa la librería netdimm de DragonMinded que ya trae el WiPi.

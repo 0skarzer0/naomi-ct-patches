@@ -82,3 +82,8 @@ Volcado probado: `n2-initial_d_export_rev.a-[GDS-0025A].bin`, 201 129 984 bytes,
 | Parche + prueba en intérprete | ✅ |
 | Prueba en placa | ⏳ |
 | Ver. 2 y Ver. 3 | ⏳ (mismo método; necesitan su propio parche) |
+
+## Solo controles
+
+`initiald_ct_controles.ips` es el mismo parche sin la parte que apaga CARD R/W. Se usa junto con el lector de
+tarjetas virtual de [card-reader/](../card-reader/README.md).

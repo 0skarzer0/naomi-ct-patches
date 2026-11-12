@@ -71,6 +71,10 @@
   en `0x0DF00000` (RAM libre confirmada) y el gancho funciona. `vcard_pi.py debug`: 12805 llamadas,
   40 paquetes, 0 NAK, comandos 10 (×1), 20 (×4), 40 (×19), 7x (×16); sin tarjeta todavía (seq 0).
   Falta: comprar tarjeta en partida, expulsarla y comprobar que llega `initiald_exp_reva_vcard.card` a la Pi.
+- Imagen actual en la Pi (`/boot/roms/initiald_exp_reva_vcard.bin.gz`): controles CT
+  (`initial-d/initiald_ct_controles.ips`, sin apagar el lector) + lector virtual + free play y attract
+  sound off (`tools/system_defaults.py`). Para que la BIOS aplicara los ajustes se cargó antes Jambo.
+  Arranca y habla con el lector igual (36 paquetes, 0 NAK).
 - Acceso a la Pi desde la nube: shell del PC del usuario (carpeta conectada en C:; `E:\roms` no se
   monta) + SSH con paramiko (usuario root; la contraseña la da el usuario en el chat, nunca en ficheros).
 
