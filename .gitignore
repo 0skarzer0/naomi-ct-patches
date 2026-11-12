@@ -5,3 +5,9 @@
 *.7z
 *.dat
 __pycache__/
+# Lector virtual: el binario compilado es código propio y sí se sube
+!card-reader/vcard.bin
+card-reader/*.o
+card-reader/*.elf
+card-reader/*.map
+card-reader/test_host

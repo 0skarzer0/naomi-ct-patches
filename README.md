@@ -54,6 +54,16 @@ Según la [referencia de arneses](docs/referencia-arneses.md) (lo que otro usuar
 | Maximum Speed | Nada (según el arnés): comprobar | ⏳ |
 | King of Route 66 | Como 18 Wheeler + limpiaparabrisas; el micrófono necesita hardware | ⏳ |
 
+## Lector de tarjetas virtual
+
+[card-reader/](card-reader/): para los juegos que guardan en tarjeta magnética (Initial D…), se añade
+a la imagen un lector **por software** que contesta al juego en lugar del lector real. La tarjeta se
+guarda como archivo en la Raspberry, sin cable ni adaptador.
+
+| Juego | Estado |
+|---|---|
+| Initial D Export Rev A (GDS-0025A) | 🧪 Probado en el PC y en el intérprete SH-4; falta placa |
+
 ## Procedimiento (repetible con otros juegos)
 
 1. **Comparar mapeos**: `naomi_roms_input.h` de Flycast e `INPUT_PORTS` de `naomi.cpp` en MAME, frente a
@@ -79,9 +89,24 @@ las direcciones de carga salen de la cabecera de cada conversión.
 | `tools/sh4dis.py` | Desensamblador SH-4 con literales resueltos (`pip install "capstone>=6"`); base de carga `0x0C020000` |
 | `tools/sh4mini.py` | Intérprete SH-4 mínimo para pruebas de equivalencia de funciones pequeñas |
 | `tools/sh4asm.py` | Ensamblador SH-4 mínimo (etiquetas, huecos) para escribir los parches a mano |
+| `card-reader/` | Lector de tarjetas virtual: código SH-4 en C, `make_image.py`, `vcard_pi.py` para la Pi |
 
 Cada juego tiene en su carpeta un `build_patch.py` (genera los IPS desde ensamblador escrito a mano),
 un `test_patch.py` y un `README.md` con las direcciones y notas técnicas.
+
+## Créditos
+
+- **[MAME](https://github.com/mamedev/mame)** y **[Flycast](https://github.com/flyinghead/flycast)**:
+  mapas de entradas de cada juego y documentación de la NAOMI.
+- **Autor del hilo
+  [Crazy Taxi multi harness](https://www.arcade-projects.com/threads/crazy-taxi-multi-harness-w-button-panels.30132/)**
+  (arcade-projects): los arneses por hardware que sirven de referencia para cada parche.
+- **[Capstone](https://www.capstone-engine.org/)**: desensamblado SH-4.
+- **[YACardEmu](https://github.com/GXTX/YACardEmu)** (GXTX): documentación del protocolo del lector
+  de tarjetas (implementación propia, sin su código).
+- **WiPi Netbooter** (Winteriscoming) y **[netboot](https://github.com/DragonMinded/netboot)**
+  (DragonMinded): carga por red y peek/poke del NetDIMM.
+- Hilos de arcade-otaku y arcade-projects sobre 18 Wheeler y la BIOS multirregión.
 
 ## Aviso legal
 

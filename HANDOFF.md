@@ -46,6 +46,30 @@
 - **Siguiente paso:** probarlo en placa (MT). Comprobar si en algún menú el pulso de vista molesta.
 - Entrada en `romsinfo.csv`: `initiald_exp_reva_ct.bin.gz`, `openjvs` = `crazy-taxi`, `game_id` = `BFFA`.
 
+### Lector de tarjetas virtual — Initial D Export Rev A — 🧪 falta probar en placa
+
+- Petición del usuario: que Initial D use una tarjeta guardada como archivo en la Pi, sin cable, igual
+  que la `.vmu` de dc2naomi. Se parte del volcado **original** (CARD R/W en ON), no del de lector apagado.
+- Todo en [card-reader/](card-reader/README.md). Resumen:
+  - bloque C compilado en `0x0DF00000` (entrada extra en la tabla de carga `0x360`);
+  - gancho en la tarea periódica del driver serie `0x0C13A9E0` → `vcard_poll(port)`, que habla con los
+    buffers circulares del juego;
+  - tarjeta en `0x0DF00D00` con contador `seq`; `vcard_pi.py` la mete al enviar y la trae por peek.
+- Análisis del juego (RAM = ROM − 0x500 + 0x0C020000):
+  - driver serie: `0x0C13A9E0`; bombas de recepción y envío `0x0C13AD40` / `0x0C13AE60`;
+  - putc `0x0C13AF60`, getc `0x0C13B100`;
+  - capa de tarjeta `0x0C138900`–`0x0C139A00`;
+  - tabla de comandos `0x0C1EAB38` ({cmd, nº parámetros, timeout ms}).
+- Probado: `test_host` (C en PC) y `test_sh4.py` (binario SH-4 real a través del gancho en
+  `tools/sh4mini.py`): 6 paquetes, 0 NAK, tarjeta escrita y releída.
+- **Siguiente paso (placa):**
+  1. Cargar la imagen en la Pi .60 (NetDIMM 10.0.0.4) y ejecutar `vcard_pi.py debug 10.0.0.4`. Comprobar
+     que la cabecera `VCRD` está, que `llamadas` sube (el gancho se ejecuta) y qué comandos llegan.
+  2. Si el juego se cuelga al arrancar, sospechar de `0x0DF00000`: mover `VC_BASE` (build.sh/vcard.ld).
+  3. Comprar tarjeta, jugar y expulsar; comprobar que aparece `JUEGO.card` en la Pi.
+- En la sesión del 2026-11-12 no se pudo acceder a la Pi desde la nube: el puente del PC del usuario
+  falló al montar `E:\roms`.
+
 ### Aviso: 18 Wheeler y la BIOS multirregión
 
 El usuario tiene BIOS multirregión. Según arcade-otaku y arcade-projects, 18 Wheeler se cuelga con ella
@@ -56,7 +80,8 @@ Export H funciona. El parche de 18 Wheeler no se puede probar en placa hasta cam
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
 multijuego de arcade-projects, traducido a lo que debe hacer cada parche. Orden propuesto:
-1. Club Kart (palanca a J2 + vista) e Initial D Ver. 2 / Ver. 3 (mismo método que la Ver. 1).
+1. Club Kart (palanca a J2 + vista) e Initial D Ver. 2 / Ver. 3 (mismo método que la Ver. 1; la
+   Ver. 3 exige tarjeta: usar `card-reader/` con su entrada en `GAMES`).
 2. Faster Than Speed (turbo) y comprobar Maximum Speed (Atomiswave).
 3. King of Route 66 (lo más complejo).
 
