@@ -79,6 +79,11 @@
   monta) + SSH con `tools/pi_ssh.py` (paramiko, usuario root; la contraseña la da el usuario en el chat,
   nunca en ficheros). La web del WiPi es http://192.168.68.60/; la NetDIMM, 10.0.0.4. Las imágenes se suben
   a `/boot/roms/` y `vcard_pi.py` está en `/sbin/piforce/`.
+- **2026-11-12, primera partida (sin tarjeta, free play):** el juego mandó 33 (leer, esperando tarjeta);
+  el lector virtual contestó S=0x34 (esperando) ~40 veces; después 40 (cancelar), D0 30/31 (persiana) y
+  vuelta al sondeo 20/40. No hubo B0 (dispensar) ni 53 (escribir): no se ofreció comprar tarjeta o no se
+  eligió. 0 NAK. El byte R coincide con YACardEmu: bit7 persiana abierta (si no, bit6), bit5 = dispensador
+  con tarjetas. Falta saber qué mostró la pantalla (¿opción de comprar tarjeta?, ¿depende de créditos?).
 - **Pendiente ahora:** el usuario juega comprando tarjeta nueva; después, `vcard_pi.py debug` y comprobar
   `/boot/roms/initiald_exp_reva_vcard.card`; luego recargar el juego y ver que la lee. Después: integrar
   `vcard_pi.py send` en `wipiloader.py` (como dc2naomi) para que funcione cargando desde la web/menú.
