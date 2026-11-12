@@ -76,7 +76,12 @@
   sound off (`tools/system_defaults.py`). Para que la BIOS aplicara los ajustes se cargó antes Jambo.
   Arranca y habla con el lector igual (36 paquetes, 0 NAK).
 - Acceso a la Pi desde la nube: shell del PC del usuario (carpeta conectada en C:; `E:\roms` no se
-  monta) + SSH con paramiko (usuario root; la contraseña la da el usuario en el chat, nunca en ficheros).
+  monta) + SSH con `tools/pi_ssh.py` (paramiko, usuario root; la contraseña la da el usuario en el chat,
+  nunca en ficheros). La web del WiPi es http://192.168.68.60/; la NetDIMM, 10.0.0.4. Las imágenes se suben
+  a `/boot/roms/` y `vcard_pi.py` está en `/sbin/piforce/`.
+- **Pendiente ahora:** el usuario juega comprando tarjeta nueva; después, `vcard_pi.py debug` y comprobar
+  `/boot/roms/initiald_exp_reva_vcard.card`; luego recargar el juego y ver que la lee. Después: integrar
+  `vcard_pi.py send` en `wipiloader.py` (como dc2naomi) para que funcione cargando desde la web/menú.
 
 ### Aviso: 18 Wheeler y la BIOS multirregión
 
