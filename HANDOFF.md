@@ -92,6 +92,13 @@
   juego al DIMM. Prueba en curso: juego recargado SIN vigilante, en attract, sin peeks.
   Si no se cuelga: vigilante con 1 peek (seq) por vuelta y la tarjeta leída despacio (pausa entre peeks);
   `debug` solo con el juego parado o en test.
+- **2026-11-12, segunda partida (eligiendo comprar tarjeta):** sin cuelgue (vigilante apagado). Contadores:
+  10×1, 20×14, 33×3, 40×44, 7x×16, D0×6; **ningún B0 ni 53**, 0 NAK. Pantallas del juego: "DO YOU HAVE AN
+  INITIAL D CARD?" (sí = meter tarjeta, no = START) y "WOULD YOU LIKE TO PURCHASE AN INITIAL D CARD?"
+  (sí = botón de VISTA, no = START). Con el parche CT, vista = toque corto de START, START = mantenerlo.
+  El juego interpreta el byte R así (0x0C138CC0): bits 7-6 → +48 (persiana), bit 5 → +52 STOCKER (1 = OK,
+  0 = "NO CARD IN BOX"); el lector virtual manda bit 5 = 1. Sin ajustes de precio de tarjeta en el juego.
+  Por confirmar: si el "sí" de compra se registró (¿el pulso de vista vale en ese menú?).
 - **Pendiente ahora:** el usuario juega comprando tarjeta nueva; después, `vcard_pi.py debug` y comprobar
   `/boot/roms/initiald_exp_reva_vcard.card`; luego recargar el juego y ver que la lee. Después: integrar
   `vcard_pi.py send` en `wipiloader.py` (como dc2naomi) para que funcione cargando desde la web/menú.
