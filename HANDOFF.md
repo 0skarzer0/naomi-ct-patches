@@ -67,8 +67,12 @@
      que la cabecera `VCRD` está, que `llamadas` sube (el gancho se ejecuta) y qué comandos llegan.
   2. Si el juego se cuelga al arrancar, sospechar de `0x0DF00000`: mover `VC_BASE` (build.sh/vcard.ld).
   3. Comprar tarjeta, jugar y expulsar; comprobar que aparece `JUEGO.card` en la Pi.
-- En la sesión del 2026-11-12 no se pudo acceder a la Pi desde la nube: el puente del PC del usuario
-  falló al montar `E:\roms`.
+- **2026-11-12, primera prueba en placa (Pi .60 → NetDIMM 10.0.0.4):** el juego arranca con el bloque
+  en `0x0DF00000` (RAM libre confirmada) y el gancho funciona. `vcard_pi.py debug`: 12805 llamadas,
+  40 paquetes, 0 NAK, comandos 10 (×1), 20 (×4), 40 (×19), 7x (×16); sin tarjeta todavía (seq 0).
+  Falta: comprar tarjeta en partida, expulsarla y comprobar que llega `initiald_exp_reva_vcard.card` a la Pi.
+- Acceso a la Pi desde la nube: shell del PC del usuario (carpeta conectada en C:; `E:\roms` no se
+  monta) + SSH con paramiko (usuario root; la contraseña la da el usuario en el chat, nunca en ficheros).
 
 ### Aviso: 18 Wheeler y la BIOS multirregión
 

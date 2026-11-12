@@ -13,7 +13,7 @@ lector.
 
 | Juego | Volcado | Estado |
 |---|---|---|
-| Initial D Arcade Stage Export Rev A (GDS-0025A) | MD5 `eb7d81c2a0792267d0733beea5956066` (sin parchear) | 🧪 Probado en el PC y en el intérprete SH-4; falta probar en placa |
+| Initial D Arcade Stage Export Rev A (GDS-0025A) | MD5 `eb7d81c2a0792267d0733beea5956066` (sin parchear) | 🧪 Arranca en placa y el juego habla con el lector virtual (0 errores); falta probar compra y grabado de tarjeta |
 
 Para la tarjeta, en el menú de test el ajuste **CARD R/W** tiene que estar en **ON** (el valor de
 fábrica). La imagen se hace desde el volcado original, no desde el que arranca con el lector apagado.
