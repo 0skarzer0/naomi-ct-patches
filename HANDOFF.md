@@ -124,6 +124,11 @@ Export H funciona. El parche de 18 Wheeler no se puede probar en placa hasta cam
 cambiar de juego, y algunos juegos tienen además su propio ajuste de sonido en attract. Las imágenes que se
 generen a partir de ahora habrá que pasarlas también (o usar `tools/system_defaults.py` al crearlas).
 
+Resultado: 49 de 50 imágenes con free play y attract mudo (comprobado leyendo la cabecera de cada una).
+Originales en `/boot/roms_orig/` (y `/boot/roms_orig_2/` para dc-mk64, que se había vuelto a generar mientras
+corría el lote). **`n2-the_king_of_route66-[840-0087].bin.gz` está corrupto en origen** (pigz: "incomplete
+deflate data"; fecha 10 feb): no se tocó, hay que volver a copiarlo desde un volcado bueno y pasarle el script.
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
