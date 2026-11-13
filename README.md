@@ -90,6 +90,7 @@ las direcciones de carga salen de la cabecera de cada conversión.
 | `tools/sh4mini.py` | Intérprete SH-4 mínimo para pruebas de equivalencia de funciones pequeñas |
 | `tools/sh4asm.py` | Ensamblador SH-4 mínimo (etiquetas, huecos) para escribir los parches a mano |
 | `tools/system_defaults.py` | Pone en la cabecera FREE PLAY y attract sound OFF por defecto (las 8 regiones) |
+| `tools/sysdef_all.py` | Lo mismo en lote, en la Raspberry, para todas las imágenes de `/boot/roms` (guarda los originales) |
 | `tools/pi_ssh.py` | Comandos y copias en la Raspberry por SSH (contraseña solo por variable de entorno) |
 | `card-reader/` | Lector de tarjetas virtual: código SH-4 en C, `make_image.py`, `vcard_pi.py` para la Pi |
 

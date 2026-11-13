@@ -116,6 +116,14 @@ El usuario tiene BIOS multirregión. Según arcade-otaku y arcade-projects, 18 W
 (en la demo o en el mapa de EE. UU.) aunque no esté parcheado. Con la BIOS Export EPR-23608B o la
 Export H funciona. El parche de 18 Wheeler no se puede probar en placa hasta cambiar la BIOS.
 
+## Free play y attract mudo en todas las imágenes
+
+2026-11-13: a petición del usuario, `tools/sysdef_all.py` se pasó en la Pi .60 a las 50 imágenes de
+`/boot/roms` (NAOMI, NAOMI 2, conversiones Atomiswave, dc2naomi y homebrew). Los originales están en
+`/boot/roms_orig/`. Registro en `/var/log/system_defaults.log`. Recordar: la BIOS solo aplica los valores al
+cambiar de juego, y algunos juegos tienen además su propio ajuste de sonido en attract. Las imágenes que se
+generen a partir de ahora habrá que pasarlas también (o usar `tools/system_defaults.py` al crearlas).
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
