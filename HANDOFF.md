@@ -157,6 +157,16 @@ Lecciones del incidente:
 - Acceso: SSH desde el PC del usuario con paramiko (`tools/pi_ssh.py`), contraseña por variable de entorno, nunca en
   ficheros ni en el repositorio.
 
+### ERROR 02 en la Pi .250: imágenes solo para Japón (2026-11-19)
+
+`n1-capcom_vs_snk_millenium_fight_2000_pro-unlocked-[GDL-0004]` (y la versión normal, que ya no está en la Pi) daba
+**ERROR 02 "THIS GAME IS NOT ACCEPTABLE BY MAIN BOARD"**: su máscara de regiones (0x428 de la cabecera, ver
+[docs/naomi.md de DragonMinded/netboot](https://github.com/DragonMinded/netboot/blob/trunk/docs/naomi.md)) vale `01`
+(solo Japón); las que cargan tienen `ff`. Con `tools/region_ff.py` se puso a `ff` (cambia solo ese byte, comprobado
+con `cmp` sobre la imagen descomprimida). Copia del original en `/boot/roms_backup/` de la Pi. **Falta probarlo en la
+placa.** `n1-guilty_gear_xx_reload-[GDL-0019]` también tiene `01` (sin tocar). No tiene que ver con el parche de free
+play (0x1E0).
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
