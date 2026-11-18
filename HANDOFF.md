@@ -129,6 +129,34 @@ Originales en `/boot/roms_orig/` (y `/boot/roms_orig_2/` para dc-mk64, que se ha
 corría el lote). **`n2-the_king_of_route66-[840-0087].bin.gz` está corrupto en origen** (pigz: "incomplete
 deflate data"; fecha 10 feb): no se tocó, hay que volver a copiarlo desde un volcado bueno y pasarle el script.
 
+### Pi del mueble estándar (192.168.68.250), 2026-11-13 a 18
+
+A petición del usuario se hizo lo mismo en la segunda Raspberry (mueble NAOMI estándar, NetDIMM en `10.0.0.3`),
+**sobrescribiendo las imágenes y sin guardar originales** (así no hay que tocar `romsinfo.csv`), con
+`tools/sysdef_inplace.py`, y **solo en NAOMI, NAOMI 2 y Atomiswave** (prefijos `aw-`, `n1-`, `n2-`): las
+conversiones de Dreamcast (`dc-*`, dc2naomi) y el homebrew (`h-*`) **no se parchean** en esa Pi.
+
+Resultado (comprobado leyendo la cabecera de las 190 imágenes): 159 `aw-`/`n1-`/`n2-` con free play y attract mudo;
+29 (`dc-*` y `h-outrunners_dcport`) con la zona 0x1E0-0x25F a ceros, como las de origen; 2 sin tocar porque no
+tienen cabecera NAOMI (`n1-ninja_assault-[25469801_NJA3_Ver.A]`, que empieza por `ff ff ff ff…`, y
+`n1-the_house_of_the_dead_2-[834-13636]`, que empieza por código SH-4): hay que mirarlos aparte.
+
+Lecciones del incidente:
+- **Filtrar siempre por prefijo.** La primera pasada usó una variante de `sysdef_all.py` sin filtro, recorrió toda
+  `/boot/roms` y parcheó por error 28 imágenes dc2naomi y `h-outrunners_dcport` antes de pararla. Como no se
+  guardaban originales, se **reconstruyeron**: el parche solo cambia 0x1E0-0x25F (bytes 0, 1 y 3 de cada bloque de
+  16) y todas las imágenes dc2naomi y homebrew sin parchear de la carpeta del PC tienen esa zona entera a ceros.
+  `sysdef_inplace.py` hace esa restauración (`--restore-only`) y solo toca las que tienen exactamente el patrón.
+- **Sin originales no hay vuelta atrás exacta:** antes de sobrescribir en lote, comprobar qué ficheros se van a
+  tocar (lista de prefijos o una pasada en seco).
+- **La Pi se reinició a mitad** (sin RTC: la hora se reinicia; `/var/log` está en tmpfs y se pierde el registro) y
+  dejó un `*.tmp` a medias. El original seguía intacto porque se reemplaza solo al terminar. Borrar los `*.tmp` y
+  relanzar: salta lo ya hecho. Redirigir la salida a un fichero en `/root`, no a `/var/log`.
+- Ritmo en una Pi 3: unos 6 ficheros pequeños cada 3 minutos; las imágenes de 200-450 MB tardan varios minutos
+  cada una. Las 190 imágenes (unos 21 GB) llevaron varias horas; el disco necesita espacio libre para una imagen.
+- Acceso: SSH desde el PC del usuario con paramiko (`tools/pi_ssh.py`), contraseña por variable de entorno, nunca en
+  ficheros ni en el repositorio.
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble

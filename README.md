@@ -91,6 +91,7 @@ las direcciones de carga salen de la cabecera de cada conversión.
 | `tools/sh4asm.py` | Ensamblador SH-4 mínimo (etiquetas, huecos) para escribir los parches a mano |
 | `tools/system_defaults.py` | Pone en la cabecera FREE PLAY y attract sound OFF por defecto (las 8 regiones) |
 | `tools/sysdef_all.py` | Lo mismo en lote, en la Raspberry, para todas las imágenes de `/boot/roms` (guarda los originales) |
+| `tools/sysdef_inplace.py` | Como `sysdef_all.py` pero sobrescribe las imágenes (sin originales) y **solo** en `aw-`/`n1-`/`n2-`; con modo de restauración de las `dc-*` parcheadas por error |
 | `tools/pi_ssh.py` | Comandos y copias en la Raspberry por SSH (contraseña solo por variable de entorno) |
 | `card-reader/` | Lector de tarjetas virtual: código SH-4 en C, `make_image.py`, `vcard_pi.py` para la Pi |
 
@@ -110,6 +111,9 @@ un `test_patch.py` y un `README.md` con las direcciones y notas técnicas.
 - **WiPi Netbooter** (Winteriscoming) y **[netboot](https://github.com/DragonMinded/netboot)**
   (DragonMinded): carga por red y peek/poke del NetDIMM.
 - Hilos de arcade-otaku y arcade-projects sobre 18 Wheeler y la BIOS multirregión.
+- **[pigz](https://zlib.net/pigz/)** (Mark Adler), que usan `sysdef_all.py` y `sysdef_inplace.py` para descomprimir y
+  recomprimir las imágenes en la Raspberry, y **[paramiko](https://www.paramiko.org/)** (Jeff Forcier y colaboradores),
+  con el que se accede por SSH a las Raspberry desde el PC.
 
 ## Aviso legal
 
