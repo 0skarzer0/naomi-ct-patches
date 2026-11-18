@@ -167,6 +167,22 @@ con `cmp` sobre la imagen descomprimida). Copia del original en `/boot/roms_back
 placa.** `n1-guilty_gear_xx_reload-[GDL-0019]` también tiene `01` (sin tocar). No tiene que ver con el parche de free
 play (0x1E0).
 
+### Pi .250: más regiones, Virtua Fighter 4 y limpieza del CSV (2026-11-19)
+
+- `tools/region_ff.py` (0x428 de `01` a `ff`, copia en `/boot/roms_backup/`) también en
+  `n1-guilty_gear_xx_reload-[GDL-0019]` y `n2-virtua_fighter_4_evolution_ver.b-[GDS-0024B]`. Capcom vs SNK Pro ya
+  **funciona en placa** con este arreglo (confirmado por el usuario).
+- Borrados, con el visto bueno del usuario, los VF4 que no aportan: `[GDS-0012]`, `ver.a-[GDS-0012B]`,
+  `final_tuned-[GDS-0036A]`, `final_tuned_ver.a-[GDS-0036D]` y `evolution-[GDS-0024B]` (mismo número que el `ver.b`
+  y misma cabecera, pero contenido distinto). Quedan VF4 Ver.B (0012C), Evolution Ver.B y Final Tuned Ver.B (0036F).
+- `romsinfo.csv`: quitadas las 16 filas sin fichero (las 5 de VF4 y 11 de juegos que el usuario ya había borrado),
+  descripción corta de VF4 Ver.B corregida e importado a la web. 174 filas = 174 ficheros. Copia previa:
+  `/boot/config/romsinfo.csv.bak_antes_limpieza`.
+- Siguen con máscara de regiones distinta de `ff` (pueden dar ERROR 02 según la región de la placa, sin tocar):
+  solo Japón (`01`) Crackin' DJ 2, Dynamite Baseball, Giant Gram 4, Jingi Storm, Melty Blood Act Cadenza Rev A,
+  Mushi King 2004 y 2005, Noukone Puzzle Takoron, Rhythm Tengoku y Street Fighter Zero 3 Upper; `02` Derby Owners
+  Club; `03` Gundam Federation vs Zeon DX. Dead or Alive 2 (`17`) y Power Stone 2 (`0f`) incluyen USA y Export.
+
 ### Crazy Taxi (.60) se cuelga con el parche de free play (2026-11-19)
 
 `n1-crazy_taxi-[840-0002]` parcheado se colgaba a los pocos segundos de partida; el usuario lo restauró. Su cabecera
