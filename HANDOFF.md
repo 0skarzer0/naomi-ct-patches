@@ -167,6 +167,17 @@ con `cmp` sobre la imagen descomprimida). Copia del original en `/boot/roms_back
 placa.** `n1-guilty_gear_xx_reload-[GDL-0019]` también tiene `01` (sin tocar). No tiene que ver con el parche de free
 play (0x1E0).
 
+### Crazy Taxi (.60) se cuelga con el parche de free play (2026-11-19)
+
+`n1-crazy_taxi-[840-0002]` parcheado se colgaba a los pocos segundos de partida; el usuario lo restauró. Su cabecera
+original ya trae `aplicar = 1` (01 00 00 01: moneda normal, código 1, attract con sonido), así que el parche solo le
+cambiaba el bit de attract mudo y el código de monedas (27). Para saber cuál de los dos es, con
+`tools/sysdef_copy.py` se hicieron dos copias en `/boot/roms` de la .60, con fila en el menú:
+`n1-crazy_taxi_test_sonido` (solo attract mudo) y `n1-crazy_taxi_test_freeplay` (solo free play). Mismo serial
+(BAC0) que el original: **cargar otro juego entre prueba y prueba** para que la BIOS aplique los ajustes. Otra causa
+posible sin relación con el parche: es un juego de cartucho que lee la NetDIMM durante la partida, y los peeks desde
+la Pi ya colgaron Initial D (al hacer las copias solo corría `timehack.py`). **Resultado pendiente.**
+
 ## Siguientes juegos candidatos
 
 Ver [docs/referencia-arneses.md](docs/referencia-arneses.md): lo que hace cada arnés del mueble
