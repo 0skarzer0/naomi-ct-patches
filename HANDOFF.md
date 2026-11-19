@@ -178,10 +178,13 @@ play (0x1E0).
 - `romsinfo.csv`: quitadas las 16 filas sin fichero (las 5 de VF4 y 11 de juegos que el usuario ya había borrado),
   descripción corta de VF4 Ver.B corregida e importado a la web. 174 filas = 174 ficheros. Copia previa:
   `/boot/config/romsinfo.csv.bak_antes_limpieza`.
-- Siguen con máscara de regiones distinta de `ff` (pueden dar ERROR 02 según la región de la placa, sin tocar):
-  solo Japón (`01`) Crackin' DJ 2, Dynamite Baseball, Giant Gram 4, Jingi Storm, Melty Blood Act Cadenza Rev A,
-  Mushi King 2004 y 2005, Noukone Puzzle Takoron, Rhythm Tengoku y Street Fighter Zero 3 Upper; `02` Derby Owners
-  Club; `03` Gundam Federation vs Zeon DX. Dead or Alive 2 (`17`) y Power Stone 2 (`0f`) incluyen USA y Export.
+- Después, también a petición del usuario, `region_ff.py` en lote (`/root/region_batch.sh` con la lista en
+  `/root/region_list.txt`, copia de cada original en `/boot/roms_backup/`) a las 12 que no tenían `ff`: solo Japón
+  (`01`) Crackin' DJ 2, Dynamite Baseball, Giant Gram 4, Jingi Storm, Melty Blood Act Cadenza Rev A, Mushi King 2004 y
+  2005, Noukone Puzzle Takoron, Rhythm Tengoku y Street Fighter Zero 3 Upper; `02` Derby Owners Club; `03` Gundam
+  Federation vs Zeon DX. Sin tocar Dead or Alive 2 (`17`) y Power Stone 2 (`0f`), que ya incluyen USA y Export, y
+  `n1-the_house_of_the_dead_2`, sin cabecera NAOMI. Para buscarlas: leer el byte 1065 (0x428) de cada imagen
+  descomprimida.
 
 ### Crazy Taxi (.60) se cuelga con el parche de free play (2026-11-19)
 
