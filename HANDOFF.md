@@ -195,7 +195,13 @@ cambiaba el bit de attract mudo y el código de monedas (27). Para saber cuál d
 `n1-crazy_taxi_test_sonido` (solo attract mudo) y `n1-crazy_taxi_test_freeplay` (solo free play). Mismo serial
 (BAC0) que el original: **cargar otro juego entre prueba y prueba** para que la BIOS aplique los ajustes. Otra causa
 posible sin relación con el parche: es un juego de cartucho que lee la NetDIMM durante la partida, y los peeks desde
-la Pi ya colgaron Initial D (al hacer las copias solo corría `timehack.py`). **Resultado pendiente.**
+la Pi ya colgaron Initial D (al hacer las copias solo corría `timehack.py`). **Resultado (2026-11-19):** se cuelgan las dos; la copia de control (mismo contenido, solo recomprimida) no. Causa:
+**Crazy Taxi y Jambo! Safari tienen protección contra cambios en la cabecera** (DragonMinded/netboot trae para ambos
+un `*_noprotect.binpatch`, «disable header modification protection»). **No pasarles `sysdef_*.py`.** Para free play y
+attract mudo se usan los parches de código del propio netboot (`/sbin/piforce/dm_netboot/patches/`) con
+`tools/binpatch_gz.py`: `n1-crazy_taxi_test_dm` (original + `CrazyTaxi_freeplay` + `CrazyTaxi_no_attract`, cabecera
+intacta) y `n1-jambo_safari_ct_test_dm` (la imagen CT, con la cabecera ya cambiada, + `Jambo_Safari_noprotect`,
+`_freeplay` y `_no_attract`). Pendiente de probar en placa.
 
 ## Siguientes juegos candidatos
 

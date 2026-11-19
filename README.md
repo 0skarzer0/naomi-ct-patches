@@ -93,6 +93,7 @@ las direcciones de carga salen de la cabecera de cada conversión.
 | `tools/sysdef_all.py` | Lo mismo en lote, en la Raspberry, para todas las imágenes de `/boot/roms` (guarda los originales) |
 | `tools/sysdef_inplace.py` | Como `sysdef_all.py` pero sobrescribe las imágenes (sin originales) y **solo** en `aw-`/`n1-`/`n2-`; con modo de restauración de las `dc-*` parcheadas por error |
 | `tools/sysdef_copy.py` | Copia de prueba con solo uno de los dos ajustes (attract mudo o free play), para aislar cuál cuelga un juego |
+| `tools/binpatch_gz.py` | Aplica los `.binpatch` de DragonMinded/netboot (free play, attract mudo, noprotect) a una `.bin.gz` |
 | `tools/region_ff.py` | Pone a `ff` la máscara de regiones (0x428) de una imagen solo para Japón: arregla el ERROR 02 |
 | `tools/pi_ssh.py` | Comandos y copias en la Raspberry por SSH (contraseña solo por variable de entorno) |
 | `card-reader/` | Lector de tarjetas virtual: código SH-4 en C, `make_image.py`, `vcard_pi.py` para la Pi |
@@ -111,7 +112,8 @@ un `test_patch.py` y un `README.md` con las direcciones y notas técnicas.
 - **[YACardEmu](https://github.com/GXTX/YACardEmu)** (GXTX): documentación del protocolo del lector
   de tarjetas (implementación propia, sin su código).
 - **WiPi Netbooter** (Winteriscoming) y **[netboot](https://github.com/DragonMinded/netboot)**
-  (DragonMinded): carga por red y peek/poke del NetDIMM.
+  (DragonMinded): carga por red y peek/poke del NetDIMM, y sus parches `.binpatch` de free play, attract mudo y
+  protección de cabecera (Crazy Taxi, Jambo! Safari…), que aplica `tools/binpatch_gz.py`.
 - Hilos de arcade-otaku y arcade-projects sobre 18 Wheeler y la BIOS multirregión.
 - **[pigz](https://zlib.net/pigz/)** (Mark Adler), que usan `sysdef_all.py` y `sysdef_inplace.py` para descomprimir y
   recomprimir las imágenes en la Raspberry, y **[paramiko](https://www.paramiko.org/)** (Jeff Forcier y colaboradores),

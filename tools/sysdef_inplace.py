@@ -17,6 +17,9 @@ Variante de sysdef_all.py con filtro por prefijo del nombre de fichero y modo de
 - Cada imagen se escribe en NOMBRE.tmp, se comprueba (pigz -t y cabecera) y solo entonces reemplaza al original.
   Si falla algo, queda el original. Si la Pi se reinicia a mitad, borrar los *.tmp y relanzar.
 - Salida por pantalla: usar nohup ... > fichero; las imágenes grandes tardan varios minutos cada una.
+
+OJO: Crazy Taxi y Jambo! Safari (y quizá otros de 1999-2000) se cuelgan si se cambia su cabecera; usar con
+ellos los .binpatch de DragonMinded/netboot (tools/binpatch_gz.py).
 """
 import os, subprocess, sys
 

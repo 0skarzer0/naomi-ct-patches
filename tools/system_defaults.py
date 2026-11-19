@@ -16,6 +16,9 @@ Por defecto pone en todas las regiones: aplicar = 1, attract silenciado y free p
 
 La BIOS solo usa estos valores cuando inicializa los ajustes del juego (al cargar un juego distinto del
 último que guardó en su EEPROM). Si se vuelve a cargar el mismo juego, se conservan los de antes.
+
+OJO: Crazy Taxi y Jambo! Safari (y quizá otros de 1999-2000) se cuelgan si se cambia su cabecera; usar con
+ellos los .binpatch de DragonMinded/netboot (tools/binpatch_gz.py).
 """
 import gzip
 import sys

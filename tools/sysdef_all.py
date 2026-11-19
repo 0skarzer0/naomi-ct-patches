@@ -10,6 +10,9 @@ una carpeta, sin pasar las imágenes por la red. Lo mismo que system_defaults.py
   regiones de 0x1E0).
 - Comprueba cada resultado (pigz -t y cabecera) antes de cambiarlo; el original va a ORIG.
 - Registro: /var/log/system_defaults.log
+
+OJO: Crazy Taxi y Jambo! Safari (y quizá otros de 1999-2000) se cuelgan si se cambia su cabecera; usar con
+ellos los .binpatch de DragonMinded/netboot (tools/binpatch_gz.py).
 """
 import os, subprocess, sys, time
 LOG = '/var/log/system_defaults.log'
