@@ -11,3 +11,5 @@ card-reader/*.o
 card-reader/*.elf
 card-reader/*.map
 card-reader/test_host
+# errores de los encargos al equipo (agy)
+.agy-tasks/*.err
